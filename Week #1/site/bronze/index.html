@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+	
+		<meta charset="utf-8">
+			
+		<title>MiU Project #2</title>
+			
+		<!--  Mobile viewport optimized: j.mp/bplateviewport -->
+		<meta name="HandheldFriendly" content="True">
+		<meta name="MobileOptimized" content="320"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<!-- Mobile IE needs ClearType for smoothing fonts -->
+		<meta http-equiv="cleartype" content="on">
+		
+		<!-- StyleSheets under here -->
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+		<link href="css/new.css" rel="stylesheet" type="text/css" />
+		
+		
+		<!-- JavaScript is normally at the end of the body, except for Modernizr which enables HTML5 elements & feature detects -->
+		<script src="js/libs/modernizr.custom.min.js"></script>
+	</head>
+	<body data-ajax="false">
+		<div data-role="page">
+			<div data-role="header" data-theme="b">
+				<div id="logo" style="padding: 0px 25%">
+					<img src="images/logo.png" style="height:40px; width:150px"/>
+				</div>
+				<a id="tag" href="additem.html" data-role="button" data-inline="true" data-mini="true" data-icon="plus" data-iconpos="notext" class="ui-btn-right" data-ajax="false">tag</a>
+			</div>
+			<div id="feature" style="background-image:url(images/Car1Motion.jpg)">
+				<h2>Collect and share amazing cars you find on your travels</h2>
+				
+				<a href="additem.html" data-role="button" style="width:90%; margin: 0px auto 8px auto " data-theme="b" data-ajax="false">TAG A CAR</a>
+				
+			</div>
+			<div id="browse" data-role="content" style="margin: 16px 0px 0px 0px">
+				<ul data-role="listview" data-inset="true">
+					<li><a id="account" href="#account">View My Garage</a></li>
+					<li><a id="friends" href="#friends">Visit Friends</a></li>
+					<li><a id="near" href="#near">Nearby Cars</a></li>
+				</ul>
+			</div> 
+			<footer>
+				<h3>a <a href="http://www.pixelplunder.com" data-ajax="false">pixel plunder</a> app</h3>
+				<h4><a href="http://tcook.me/miu/gold/index.html" data-ajax="false">to gold app</a></h4>
+			</footer>
+		</div>
+		
+		
+		<div data-role="page" id="account">
+			<div data-role="header" data-theme="b" data-position="fixed">
+				<a id="back" data-rel="back" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="notext" class="ui-btn-left">back</a>
+				<div id="logo" style="padding: 0px 25%">
+					<img src="images/logo.png" style="height:40px; width:150px"/>
+				</div>
+				<a id="tag" href="additem.html" data-role="button" data-inline="true" data-mini="true" data-icon="plus" data-iconpos="notext" class="ui-btn-right" data-ajax="false">tag</a>
+			</div>
+			<div data-role="content" data-theme="a">
+				<div class="ui-grid-c" style="text-align:center; padding:8px" >
+					<div class="ui-block-a">
+						<img src="images/MyFace4.png" style="width:80px; height:80px"/>
+					</div>
+					<div class="ui-block-b" style="border-right:1px solid #777; padding:16px 0px 0px 0px; margin:8px 0px 0px 0px">
+						<span class="ui-li-count ui-btn-up-c ui-btn-corner-all" style="padding:4px"> 328 </span>
+						<p style="padding:0px">Cars</p>
+					</div>
+					<div class="ui-block-c" style="border-right:1px solid #777; padding:16px 0px 0px 0px; margin:8px 0px 0px 0px">
+						<span class="ui-li-count ui-btn-up-c ui-btn-corner-all" style="padding:4px"> 32 </span>
+						<p style="padding:0px">Friends</p>
+					</div>	
+					<div class="ui-block-d" style="padding:16px 0px 0px 0px; margin:8px 0px 0px 0px">
+						<span class="ui-li-count ui-btn-up-c ui-btn-corner-all" style="padding:4px"> 8 </span>
+						<p style="padding:0px">Follower</p>
+					</div>	
+				</div><!-- /grid-b -->
+			</div>
+			<div data-role="content">
+				<ul data-role="listview" data-filter="true">
+				
+				</ul>
+			</div>	
+		
+		
+		</div>
+		
+		
+		<div data-role="page" id="friends">
+			<div data-role="header" data-theme="b" data-position="fixed">
+				<a id="back" data-rel="back" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="notext" class="ui-btn-left">back</a>
+				<div id="logo" style="padding: 0px 25%">
+					<img src="images/logo.png" style="height:40px; width:150px"/>
+				</div>
+				<a id="tag" href="additem.html" data-role="button" data-inline="true" data-mini="true" data-icon="plus" data-iconpos="notext" class="ui-btn-right" data-ajax="false">tag</a>
+			</div>
+			<div data-role="content">
+				<ul data-role="listview" data-filter="true">
+					<li data-role="list-divider">B</li>
+						<li><a id="142" href="#142">Bob Stevens</a></li>
+					<li data-role="list-divider">D</li>
+						<li><a id="512" href="#512">David Smith</a></li>
+					<li data-role="list-divider">J</li>
+						<li><a id="322" href="#322">Jason Clark</a></li>
+						<li><a id="234" href="#234">John Adams</a></li>
+					<li data-role="list-divider">K</li>
+						<li><a id="123" href="#123">Keegan Janis</a></li>
+					<li data-role="list-divider">M</li>
+						<li><a id="213" href="#213">Matt Lingo</a></li>
+						<li><a id="442" href="#442">Michael Thed</a></li>
+					<li data-role="list-divider">R</li>
+						<li><a id="002" href="#002">Rick Indigo</a></li>
+					<li data-role="list-divider">S</li>
+						<li><a id="412" href="#412">Sam Fisher</a></li>
+					<li data-role="list-divider">W</li>
+						<li><a id="341" href="#341">Will Read</a></li>
+				</ul>
+			</div>
+		
+		</div>
+		
+		</div>
+		
+		
+		<div data-role="page" id="near">
+			<div data-role="header" data-theme="b" data-position="fixed">
+				<a id="back" data-rel="back" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="notext" class="ui-btn-left">back</a>
+				<div id="logo" style="padding: 0px 25%">
+					<img src="images/logo.png" style="height:40px; width:150px"/>
+				</div>
+				<a id="tag" href="additem.html" data-role="button" data-inline="true" data-mini="true" data-icon="plus" data-iconpos="notext" class="ui-btn-right" data-ajax="false">tag</a>
+			</div>
+			<div data-role="content" style="background-image:url(images/2249882184_ac02525cfc.jpg); background-size: cover; margin: 12px auto 8px auto; width: 90%; padding:80px 12px 12px 12px; box-shadow: 0px 0px 4px black">
+				<h2>Sorry, but this page needs a little work.</h2>
+			</div>
+		</div>
+		
+		
+		
+		
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+
+	</body>
+</html>
+
