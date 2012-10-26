@@ -250,7 +250,7 @@ $('#carlist').on('pageinit', function(editCar){
 	
 	function clearLocal() {
 		if (localStorage.length === 0) {
-			alert("No cars to clear.")
+			alert("No cars to clear.");
 		} else {
 			localStorage.clear();
 			alert("All cars are deleted!");
