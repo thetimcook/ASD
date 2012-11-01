@@ -1,6 +1,4 @@
 $('#jsondata').on('pageinit', function (){
-	
-
 	$(function(){
 		$.ajax({
 			url: 'xhr/cars.php',
@@ -25,10 +23,12 @@ $('#jsondata').on('pageinit', function (){
 			}
 		});
 	});
-	
 });
 
-
+$('#xmldata').on('pageinit', function(){
+	
+	
+});
 
 
 
@@ -155,23 +155,33 @@ $('#carlist').on('pageinit', function(editCar){
 			var linksLi = $('#linkLi');
 			$('<li></li>')
 				.appendTo('#makeList')
-				.attr('id','makeSubList')
+				.attr('id','makeSubList'+ i)
 				.attr('data-role', 'collapsible')
 			;
-			var makeSubList = $('#makeSubList');
 			var key = localStorage.key(i);
 			var value = localStorage.getItem(key);
 			//Convert the string from local storage value back to an object.
 			var obj = JSON.parse(value);
+			/*
+$(''+
+				'<p>'+ obj.make[0] + obj.make[1] +'</p>'+
+				'<p>'+ obj.model[0] + obj.model[1] +'</p>'+
+				'<p>'+ obj.year[0] + obj.year[1] +'</p>'+
+				'<p>'+ obj.color[0] + obj.color[1] +'</p>'+
+				'<p>'+ obj.condition[0] + obj.condition[1] +'</p>'+
+				'<p>'+ obj.display[0] + obj.display[1] +'</p>'+
+				'<p>'+ obj.describe[0] + obj.describe[1] +'</p>'
+			).appendTo('#makeSubList');
+			
+*/
 			for (var n in obj) {
-				$('<p></p>').appendTo('#makeSubList').attr('id','makeSubLi');
+				$('<p></p>').appendTo('#makeSubList'+ i).attr('id','makeSubLi');
 				var makeSubLi = $('#makeSubLi');
 				var optSubText = obj[n][0]+" "+obj[n][1];
 				makeSubLi.html(''+ optSubText);
-				console.log(obj[n][1]);
+				console.log(optSubText);
 				linksLi.appendTo('#makeSubList');
-			}
-			
+		
 			$('<br/>').appendTo('#linksLi');
 			makeItemLinks(localStorage.key(i), linksLi); //Create edit and delete buttons
 			$('<br/>').appendTo('#linksLi');
