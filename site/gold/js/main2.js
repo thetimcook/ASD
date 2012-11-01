@@ -1,6 +1,30 @@
-$('#test').on('pageinit', function (){
+$('#jsondata').on('pageinit', function (){
 	
-	
+
+	$(function(){
+		$.ajax({
+			url: 'xhr/cars.php',
+			type: 'GET',
+			dataType: 'json',
+			success: function (response){
+				for(var i=0, j=response.cars.length; i<j; i++){
+					var car = response.cars[i];
+					$(''+
+						'<div data-role="collapsible">'+
+							'<h3>'+ car.make[1] +'</h3>'+
+							'<p>'+ car.make +'</p>'+
+							'<p>'+ car.model +'</p>'+
+							'<p>'+ car.year +'</p>'+
+							'<p>'+ car.color +'</p>'+
+							'<p>'+ car.condition +'</p>'+
+							'<p>'+ car.display +'</p>'+
+							'<p>'+ car.describe +'</p>'+
+						'</div>'
+					).appendTo('#jsonlist');
+				};
+			}
+		});
+	});
 	
 });
 
@@ -70,10 +94,10 @@ function editCar() {
 	/* toggleControls("off"); */
 	
 	//populate form fields with current values
-	make.val('car.make[1]');
-	model.val('car.model[1]');
-	year.val('car.year[1]');
-	color.val('car.color[1]');
+	make.val(''+ car.make[1]);
+	model.val(''+ car.model[1]);
+	year.val(''+ car.year[1]);
+	color.val(''+ car.color[1]);
 
 	var checkboxes = document.forms[0].display;
 	for (var i=0; i<car.display[1].length; i++) {
@@ -90,7 +114,7 @@ function editCar() {
 			radios[i].setAttribute("checked", "checked");
 		}
 	}
-	describe.val('car.describe[1]');
+	describe.val(''+ car.describe[1]);
 	
 	//remove teh listener from input save button.
 	save.removeEventListener("click", storeData);
@@ -113,23 +137,24 @@ $('#carlist').on('pageinit', function(editCar){
 		}
 	}
 
+
 	function getData(makeItemlinks){
 		if(localStorage.length === 0) {
 			alert("There are no cars in yourf Garage, so I went ahead and added a couple!");
 			autoFill();
 		}
-		$('#cars').append('<ul></ul>');
-		var makeList = $('#cars > ul');
-		makeList
+		$('<ul></ul>')
+			.appendTo('#cars')
+			.attr('id', 'makeList')
 			.attr('data-role','listview')
 			.attr('data-filter','true')
 			.attr('data-inset','false')
 		;
 		for (var i=0, len=localStorage.length; i<len; i++){
-			var linksLi = $('#linksLi');
-			makeList.append('<li></li>');
-			var makeSubList = $('#car ul > li');
-			makeSubList
+			$('<li></li>').attr('id','linkLi');
+			var linksLi = $('#linkLi');
+			$('<li></li>')
+				.appendTo('#makeList')
 				.attr('id','makeSubList')
 				.attr('data-role', 'collapsible')
 			;
@@ -138,33 +163,29 @@ $('#carlist').on('pageinit', function(editCar){
 			var value = localStorage.getItem(key);
 			//Convert the string from local storage value back to an object.
 			var obj = JSON.parse(value);
-/*			console.log(obj.make);
- 			getLogo(obj.make[1], makeSubList); */
 			for (var n in obj) {
-				makeSubList.append('<p></p>').attr('id','makeSubLi');
+				$('<p></p>').appendTo('#makeSubList').attr('id','makeSubLi');
 				var makeSubLi = $('#makeSubLi');
 				var optSubText = obj[n][0]+" "+obj[n][1];
-				makeSubLi.innerHTML = optSubText;
-				makeSubList.append('<li></li>').attr('id','linksLi');
-				
+				makeSubLi.html(''+ optSubText);
+				console.log(obj[n][1]);
+				linksLi.appendTo('#makeSubList');
 			}
 			
-			$('#linksLi').append('<br/>');
-			
+			$('<br/>').appendTo('#linksLi');
 			makeItemLinks(localStorage.key(i), linksLi); //Create edit and delete buttons
-			
-			$('#linksLi').append('<br/>');
+			$('<br/>').appendTo('#linksLi');
 		}
 	}
+
 	
 
 	//Get logo for car make.
 	function getLogo(logo, makeSubList) {
-		var imageLi = document.createElement('h3');
-		makeSubList.appendChild(imageLi);
-		var newImg = document.createElement('img');
-		var setSrc = newImg.setAttribute("src", "images/"+ logo +".jpg");
-		imageLi.appendChild(newImg);
+		$('<h3></h3>').appendTo('makeSubList').attr('id','imageLi');
+		var imageLi = $('#imageLi');
+		$('<img></img>').attr('id','newImg').attr('src','images/'+ logo +'.jpg');
+		$('#newImg').appendTo('#imageLi');
 	}
 	
 	function deleteItem() {
@@ -193,9 +214,7 @@ $('#carlist').on('pageinit', function(editCar){
 	//Create the edit and delete links for each item
 	function makeItemLinks(key, linksLi) {
 		//add edit single item link
-		linksLi.append('<a></a>');
-		var editLink = $('#cars > a:first');
-		editLink
+		$('<a></a>').appendTo('#linksLi')
 			.attr('id','editLink')
 			.attr('data-role','button')
 			.attr('data-iron','gear')
@@ -207,17 +226,14 @@ $('#carlist').on('pageinit', function(editCar){
 		var editLink = $('#editLink');
 		editLink.key = key;
 		editLink.on("click", editCar);
-		return false;
 	/*
 		var breakTag = document.createElement('br');
 		linksLi.appendChild(breakTag);
 	*/
 		
 		//add delete single item link
-		linksLi.append('<a></a>');
-		var deleteLink = $('#cars > a:last');
-		deleteLink
-			.attr('id','editLink')
+		$('<a></a>').appendTo('#linksLi')
+			.attr('id','deleteLink')
 			.attr('data-role','button')
 			.attr('data-iron','gear')
 			.attr('data-inline','true')
@@ -225,11 +241,9 @@ $('#carlist').on('pageinit', function(editCar){
 			.attr('href','#tagcar')
 			.html('Delete Car')
 		;
-		var deleteLink = $('#carlist');
+		var deleteLink = $('#deleteLink');
 		deleteLink.key = key;
 		deleteLink.on("click", deleteItem);
-		return false;
-
 	}
 	
 	getData();

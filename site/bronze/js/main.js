@@ -307,7 +307,7 @@ window.addEventListener("DOMContentLoaded", function(){
 			messageAry.push(modelError);
 		}
 		//Year Validation
-		var re = /^\d{4}ge/;
+		var re = /^\d{4}$/;
 		if (!re.exec(getYear.value)) {
 			var yearError = "Please enter a valid year.";
 			getYear.style.border = "1px solid red";
