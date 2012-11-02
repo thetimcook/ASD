@@ -22,7 +22,6 @@ $('#jsondata').on('pageinit', function (){
 	});
 });
 
-
 $('#xmldata').on('pageinit', function() { 
 	$(function(){
 		$.ajax({  
@@ -51,23 +50,10 @@ function parseXml(xml) {
 	}
 });
 
-/*
-$('#xmldata').on('pageinit', function(){
-	$(function(){
-		$.ajax({
-			url: 'xhr/tablets.xml',
-			type: 'GET',
-			dataType: 'xml',
-			success: function (response){
+$('#yamldata').on('pageinit', function(){
 
-			}
-		});
-	});
 	
 });
-*/
-
-
 
 $('#tagcar').on('pageinit', function (){
 	var tagForm = $('#addItem');
