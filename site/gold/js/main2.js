@@ -14,9 +14,6 @@ $('#jsondata').on('pageinit', function (){
 							'<p>'+ car.model +'</p>'+
 							'<p>'+ car.year +'</p>'+
 							'<p>'+ car.color +'</p>'+
-							'<p>'+ car.condition +'</p>'+
-							'<p>'+ car.display +'</p>'+
-							'<p>'+ car.describe +'</p>'+
 						'</div>'
 					).appendTo('#jsonlist');
 				};
@@ -25,10 +22,50 @@ $('#jsondata').on('pageinit', function (){
 	});
 });
 
+
+$('#xmldata').on('pageinit', function() { 
+	$(function(){
+		$.ajax({  
+			type: "GET",  
+			url: "xhr/tablets.xml",  
+			dataType: "xml",  
+			success: parseXml
+	});     
+});  
+function parseXml(xml) {  
+	$(xml).find("item").each(function() {  
+	//find each instance of loc in xml file and wrap it in a link  
+		$(''+
+			'<div data-role="collapsible">'+
+				'<h3>'+ $(this).find("title").text() +'</h3>'+
+				'<p> Resolution: '+ $(this).find("res").text() +'</p>'+
+				'<p> Processer: '+ $(this).find("pro").text() +'</p>'+
+				'<p> Height: '+ $(this).find("height").text() +'</p>'+
+				'<p> Width: '+ $(this).find("width").text() +'</p>'+
+				'<p> Depth: '+ $(this).find("depth").text() +'</p>'+
+				'<p> Weight: '+ $(this).find("weight").text() +'</p>'+
+				'<p> Price: '+ $(this).find("price").text() +'</p>'+
+			'</div>' 
+		).appendTo('#xmllist');
+		});
+	}
+});
+
+/*
 $('#xmldata').on('pageinit', function(){
-	
+	$(function(){
+		$.ajax({
+			url: 'xhr/tablets.xml',
+			type: 'GET',
+			dataType: 'xml',
+			success: function (response){
+
+			}
+		});
+	});
 	
 });
+*/
 
 
 
@@ -181,6 +218,7 @@ $(''+
 				makeSubLi.html(''+ optSubText);
 				console.log(optSubText);
 				linksLi.appendTo('#makeSubList');
+			}
 		
 			$('<br/>').appendTo('#linksLi');
 			makeItemLinks(localStorage.key(i), linksLi); //Create edit and delete buttons
