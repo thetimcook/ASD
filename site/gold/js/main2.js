@@ -168,20 +168,11 @@ $('#carlist').on('pageinit', function(editCar){
 			localStorage.setItem(id, JSON.stringify(json[n]));
 		}
 	}
-
-
 	function getData(makeItemlinks){
 		if(localStorage.length === 0) {
 			alert("There are no cars in yourf Garage, so I went ahead and added a couple!");
 			autoFill();
 		}
-		$('<ul></ul>')
-			.appendTo('#cars')
-			.attr('id', 'makeList')
-			.attr('data-role','listview')
-			.attr('data-filter','true')
-			.attr('data-inset','false')
-		;
 		for (var i=0, len=localStorage.length; i<len; i++){
 			$('<li></li>').attr('id','linkLi');
 			var linksLi = $('#linkLi');
@@ -194,31 +185,19 @@ $('#carlist').on('pageinit', function(editCar){
 			var value = localStorage.getItem(key);
 			//Convert the string from local storage value back to an object.
 			var obj = JSON.parse(value);
-			
-			/*
-$(''+
-				'<p>'+ obj.make[0] + obj.make[1] +'</p>'+
-				'<p>'+ obj.model[0] + obj.model[1] +'</p>'+
-				'<p>'+ obj.year[0] + obj.year[1] +'</p>'+
-				'<p>'+ obj.color[0] + obj.color[1] +'</p>'+
-				'<p>'+ obj.condition[0] + obj.condition[1] +'</p>'+
-				'<p>'+ obj.display[0] + obj.display[1] +'</p>'+
-				'<p>'+ obj.describe[0] + obj.describe[1] +'</p>'
-			).appendTo('#makeSubList');
-			
-*/
+
 			for (var n in obj) {
-				$('<p></p>').appendTo('#makeSubList'+ i).attr('id','makeSubLi');
-				var makeSubLi = $('#makeSubLi');
 				var optSubText = obj[n][0]+" "+obj[n][1];
-				makeSubLi.html(''+ optSubText);
-				console.log(optSubText);
-				linksLi.appendTo('#makeSubList');
+				$('<p></p>').html(''+ optSubText).appendTo('#makeSubList'+ i);
+				console.log(obj);
+				linksLi.appendTo('#makeSubList'+ i);
 			}
 		
 			$('<br/>').appendTo('#linksLi');
 			makeItemLinks(localStorage.key(i), linksLi); //Create edit and delete buttons
 			$('<br/>').appendTo('#linksLi');
+			
+			$('#makeList').listview("refresh");
 		}
 	}
 
