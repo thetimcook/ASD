@@ -16,6 +16,7 @@ $('#jsondata').on('pageinit', function (){
 							'<p>'+ car.color +'</p>'+
 						'</div>'
 					).appendTo('#jsonlist');
+					$('#jsonlist').trigger("create");
 				};
 			}
 		});
@@ -46,12 +47,20 @@ function parseXml(xml) {
 				'<p> Price: '+ $(this).find("price").text() +'</p>'+
 			'</div>' 
 		).appendTo('#xmllist');
+		$('#xmllist').trigger("create");
 		});
 	}
 });
 
 $('#yamldata').on('pageinit', function(){
-
+	$.ajax({
+		url: 'xhr/friends.yml',
+		type: 'GET',
+		dataType: 'yaml',
+		success: function (response){
+			console.log(response);
+		}
+	});
 	
 });
 
@@ -185,6 +194,7 @@ $('#carlist').on('pageinit', function(editCar){
 			var value = localStorage.getItem(key);
 			//Convert the string from local storage value back to an object.
 			var obj = JSON.parse(value);
+			
 			/*
 $(''+
 				'<p>'+ obj.make[0] + obj.make[1] +'</p>'+
