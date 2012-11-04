@@ -132,8 +132,8 @@ function editCar() {
 	color.val(''+ car.color);
 
 	var checkboxes = document.forms[0].display;
-	for (var i=0; i<car.display[1].length; i++) {
-		$(''+ car.display[1][i]).attr("checked", "checked");
+	for (var i=0; i<car.display.length; i++) {
+		$(''+ car.display[i]).attr("checked", "checked");
 	}
 	
 	var radios = document.forms[0].condition;
@@ -203,14 +203,16 @@ $('#carlist').on('pageinit', function(editCar){
 						'</li>'+
 					'</div>' 
 				).appendTo('#makeList');
+
+				makeItemLinks(localStorage.key(i));  //Create edit and delete buttons
+					
 				
 			}
-			makeItemLinks(key);  //Create edit and delete buttons
 
 		}
 		$('#makeList').trigger("create");
+		
 	}
-
 	
 	function deleteItem() {
 		var ask = confirm("Are you sure you want to delete this car.");
@@ -230,7 +232,6 @@ $('#carlist').on('pageinit', function(editCar){
 			localStorage.clear();
 			alert("All cars are deleted!");
 			window.location.reload();
-			return false;
 		}
 	}
 	
@@ -238,12 +239,11 @@ $('#carlist').on('pageinit', function(editCar){
 	//Create the edit and delete links for each item
 	function makeItemLinks(key) {
 		//add edit single item link
-
+		
 		var editLink = $('.editLink');
 		editLink.key = key;
 		editLink.on("click", editCar);
 		event.stopPropagation();
-		console.log(editLink);
 
 		//add delete single item link
 
