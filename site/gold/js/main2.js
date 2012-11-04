@@ -205,8 +205,7 @@ $('#carlist').on('pageinit', function(editCar){
 				).appendTo('#makeList');
 
 				makeItemLinks(localStorage.key(i));  //Create edit and delete buttons
-					
-				
+
 			}
 
 		}
