@@ -1,39 +1,63 @@
-friends:
-	Michael:
-	    name: Michael Cook
-	    age: 23
-	    skills: Drums, Photography, Video Editing
-	    job: Student at BBC
-	
-	Jarrod:
-		name: Jarrod Connolly
-		age: 25
-		skills: Photography, Video Editing, Graphic Design, Marketing
-		job: Store Manager at CPO
-	
-	Jeremy:
-		name: Jeremy Adams
-		age: 39
-		skills: Web Design, Marketing, Business, Graphic Design, Programming
-		job: The Lime Agency, Web Design and Marketing
-	
-	Jason:
-		name: Jason Prahl
-		age: 42
-		skills: Networking, Business, Programming
-		job: IT Director at Community Blood Center
-		
-	Jared:
-		name: Jared Jones
-		age: 20
-		skills: Programming, Mathematics, Computer Science
-		job: Operations Agent at Geek Squad
-		
-	Keegan:
-		name: Keegan Jones
-		age: 24
-		skills: Web Design, Programming, Graphic Design
-		job: Product Designer at Facebook
-		
-
-
+--- 
+- 
+  friends: ~
+- 
+  Michael: 
+    - 
+      name: "Michael Cook"
+    - 
+      age: 23
+    - 
+      skills: "Drums, Photography, Video Editing"
+    - 
+      job: "Student at BBC"
+- 
+  Jarrod: 
+    - 
+      name: "Jarrod Connolly"
+    - 
+      age: 25
+    - 
+      skills: "Photography, Video Editing, Graphic Design, Marketing"
+    - 
+      job: "Store Manager at CPO"
+- 
+  Jeremy: 
+    - 
+      name: "Jeremy Adams"
+    - 
+      age: 39
+    - 
+      skills: "Web Design, Marketing, Business, Graphic Design, Programming"
+    - 
+      job: "The Lime Agency, Web Design and Marketing"
+- 
+  Jason: 
+    - 
+      name: "Jason Prahl"
+    - 
+      age: 42
+    - 
+      skills: "Networking, Business, Programming"
+    - 
+      job: "IT Director at Community Blood Center"
+- 
+  Jared: 
+    - 
+      name: "Jared Jones"
+    - 
+      age: 20
+    - 
+      skills: "Programming, Mathematics, Computer Science"
+    - 
+      job: "Operations Agent at Geek Squad"
+- 
+  Keegan: 
+    - 
+      name: "Keegan Jones"
+    - 
+      age: 24
+    - 
+      skills: "Web Design, Programming, Graphic Design"
+    - 
+      job: "Product Designer at Facebook"

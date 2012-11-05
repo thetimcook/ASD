@@ -53,14 +53,8 @@ function parseXml(xml) {
 });
 
 $('#yamldata').on('pageinit', function(){
-	$.ajax({
-		url: 'xhr/friends.yml',
-		type: 'GET',
-		dataType: 'yaml',
-		success: function (response){
-			console.log(response);
-		}
-	});
+	var friends = ("xhr/friends.yml");
+	console.log(YAML.eval(friends));	
 	
 });
 
@@ -158,6 +152,7 @@ function editCar() {
 	//so we can use that value when we save the data we edited.
 	editSubmit.on("click", validate);
 	editSubmit.key = this.key;
+	event.stopPropagation();
 }
 
 
@@ -222,6 +217,7 @@ $('#carlist').on('pageinit', function(editCar){
 		} else {
 			alert("Car was not deleted!");
 		}
+		event.stopPropagation();
 	}
 	
 	function clearLocal() {
@@ -242,14 +238,12 @@ $('#carlist').on('pageinit', function(editCar){
 		var editLink = $('.editLink');
 		editLink.key = key;
 		editLink.on("click", editCar);
-		event.stopPropagation();
 
 		//add delete single item link
 
 		var deleteLink = $('.deleteLink');
 		deleteLink.key = key;
 		deleteLink.on("click", deleteItem);
-		event.stopPropagation();
 	}
 	
 	getData();
