@@ -53,7 +53,7 @@ function parseXml(xml) {
 });
 
 $('#yamldata').on('pageinit', function(){
-	var friends = ("xhr/friends.yml");
+	var friends = YAML.load('xhr/friends.yml');
 	console.log(YAML.eval(friends));	
 	
 });
