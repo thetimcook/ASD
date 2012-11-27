@@ -70,90 +70,92 @@ $('#tagcar').on('pageinit', function (){
 			window.location.reload();
 		}
 	});
+	
+	var make = $('#make');
+		model = $('#model');
+		year = $('#year');
+		color = $('#color');
+		describe = $('#describe');
+			
+	function storeData(key) {
+		if (!key) {
+			var id = $.now();
+		} else {
+			id = key;
+		}	
+		var condition = $('form input:checked').val();
+		var display = getCheckboxValue();
+		var car				= {};
+			car.make		= make.val();
+			car.model		= model.val();
+			car.year		= year.val();
+			car.color		= color.val();
+			car.condition	= condition;
+			car.display		= display;
+			car.describe	= describe.val();
+			
+		localStorage.setItem(id, JSON.stringify(car));
+		alert("Car Tagged!");
+	}
+	
+	function getCheckboxValue() {
+		var checkboxes = document.forms[0].display;
+		var holdValues = [];
+		for (var i=0, j=checkboxes.length; i<j; i++){
+			if(checkboxes[i].checked){
+				var checkedValue = checkboxes[i].value;
+				holdValues.push(checkedValue);
+			}
+		}
+		return holdValues;	
+	}
+	
+	function editCar() {
+		//Grab the data from our item from local storage
+		var value = localStorage.getItem(this.key);
+		var car = JSON.parse(value);
+		
+		//Show the form
+		/* toggleControls("off"); */
+		
+		//populate form fields with current values
+		make.val(''+ car.make);
+		model.val(''+ car.model);
+		year.val(''+ car.year);
+		color.val(''+ car.color);
+	
+		var checkboxes = document.forms[0].display;
+		for (var i=0; i<car.display.length; i++) {
+			$(''+ car.display[i]).attr("checked", "checked");
+		}
+		
+		var radios = document.forms[0].condition;
+		for (var i=0; i<radios.length; i++) {
+			if (radios[i].value == "Amazing" && car.condition == "Amazing"){
+				radios[i].attr("checked", "checked");
+			} else if (radios[i].value == "Not so amazing" && car.condition == "Not so amazing") {
+				radios[i].attr("checked", "checked");
+			} else if (radios[i].value == "Rubbish" && car.condition == "Rubbish") {
+				radios[i].attr("checked", "checked");
+			}
+		}
+		describe.val(''+ car.describe);
+		
+		//remove teh listener from input save button.
+		save.removeEventListener("click", storeData);
+		//Change submit button value to edit button
+		$('#headerBar').html('Edit Car Tag');
+		$('#submit').val('Edit Car Tag');
+		var editSubmit = $('#submit');
+		//Save the key value established in this function as a property of the editSubmit event
+		//so we can use that value when we save the data we edited.
+		editSubmit.on("click", validate);
+		editSubmit.key = this.key;
+		event.stopPropagation();
+	}
+
 });
 
-var make = $('#make');
-	model = $('#model');
-	year = $('#year');
-	color = $('#color');
-	describe = $('#describe');
-		
-function storeData(key) {
-	if (!key) {
-		var id = $.now();
-	} else {
-		id = key;
-	}	
-	var condition = $('form input:checked').val();
-	var display = getCheckboxValue();
-	var car				= {};
-		car.make		= make.val();
-		car.model		= model.val();
-		car.year		= year.val();
-		car.color		= color.val();
-		car.condition	= condition;
-		car.display		= display;
-		car.describe	= describe.val();
-		
-	localStorage.setItem(id, JSON.stringify(car));
-	alert("Car Tagged!");
-}
-
-function getCheckboxValue() {
-	var checkboxes = document.forms[0].display;
-	var holdValues = [];
-	for (var i=0, j=checkboxes.length; i<j; i++){
-		if(checkboxes[i].checked){
-			var checkedValue = checkboxes[i].value;
-			holdValues.push(checkedValue);
-		}
-	}
-	return holdValues;	
-}
-
-function editCar() {
-	//Grab the data from our item from local storage
-	var value = localStorage.getItem(this.key);
-	var car = JSON.parse(value);
-	
-	//Show the form
-	/* toggleControls("off"); */
-	
-	//populate form fields with current values
-	make.val(''+ car.make);
-	model.val(''+ car.model);
-	year.val(''+ car.year);
-	color.val(''+ car.color);
-
-	var checkboxes = document.forms[0].display;
-	for (var i=0; i<car.display.length; i++) {
-		$(''+ car.display[i]).attr("checked", "checked");
-	}
-	
-	var radios = document.forms[0].condition;
-	for (var i=0; i<radios.length; i++) {
-		if (radios[i].value == "Amazing" && car.condition == "Amazing"){
-			radios[i].attr("checked", "checked");
-		} else if (radios[i].value == "Not so amazing" && car.condition == "Not so amazing") {
-			radios[i].attr("checked", "checked");
-		} else if (radios[i].value == "Rubbish" && car.condition == "Rubbish") {
-			radios[i].attr("checked", "checked");
-		}
-	}
-	describe.val(''+ car.describe);
-	
-	//remove teh listener from input save button.
-	save.removeEventListener("click", storeData);
-	//Change submit button value to edit button
-	$('#headerBar').html('Edit Car Tag');
-	$('#submit').val('Edit Car Tag');
-	var editSubmit = $('#submit');
-	//Save the key value established in this function as a property of the editSubmit event
-	//so we can use that value when we save the data we edited.
-	editSubmit.on("click", validate);
-	editSubmit.key = this.key;
-	event.stopPropagation();
-}
 
 
 $('#carlist').on('pageinit', function(editCar){
