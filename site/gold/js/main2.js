@@ -30,9 +30,9 @@ $('#xmldata').on('pageinit', function() {
 			url: "xhr/tablets.xml",  
 			dataType: "xml",  
 			success: parseXml
-	});     
-});  
-function parseXml(xml) {  
+		});     
+	});  
+	function parseXml(xml) {  
 	$(xml).find("item").each(function() {  
 	//find each instance of loc in xml file and wrap it in a link  
 		$(''+
@@ -52,10 +52,32 @@ function parseXml(xml) {
 	}
 });
 
-$('#yamldata').on('pageinit', function(){
-	var friends = YAML.load('xhr/friends.yml');
-	console.log(YAML.eval(friends));	
-	
+$('#csvdata').on('pageinit', function(){
+	$(function(){
+		$.ajax({  
+			type: "GET",  
+			url: "xhr/friends.csv",  
+			dataType: "text",  
+			success: function(data) {
+				var lines = data.split("\n");
+				
+				for (var i=0, j=lines.length; i<j; i++) {
+				    var row = lines[i];
+				    var columns = row.split(",");
+				    $(''+
+						'<div data-role="collapsible">'+
+							'<h3>'+ columns[0] +'</h3>'+
+							'<p> Name: '+ columns[0] +'</p>'+
+							'<p> Age: '+ columns[1] +'</p>'+
+							'<p> Job: '+ columns[2] +'</p>'+
+							'<p> Location: '+ columns[3] +'</p>'+
+						'</div>' 
+					).appendTo('#csvlist');
+					$('#csvlist').trigger("create");
+				}
+			}
+		});   
+	});
 });
 
 $('#tagcar').on('pageinit', function (){
@@ -186,7 +208,7 @@ $('#carlist').on('pageinit', function(editCar){
 			var obj = JSON.parse(value);
 			if(!isNaN(key)) {
 				$(''+
-					'<div data-role="collapsible" data-inset="false" style="margin:0px">'+
+					'<div id="'+ key +'" data-role="collapsible" data-inset="false" style="margin:0px">'+
 						'<h3>'+ obj.make +'</h3>'+
 						'<p> Make: '+ obj.make +'</p>'+
 						'<p> Model: '+ obj.model +'</p>'+
@@ -204,7 +226,7 @@ $('#carlist').on('pageinit', function(editCar){
 				makeItemLinks(localStorage.key(i));  //Create edit and delete buttons
 
 			}
-
+			
 		}
 		$('#makeList').trigger("create");
 		
@@ -213,9 +235,10 @@ $('#carlist').on('pageinit', function(editCar){
 	function deleteItem() {
 		var ask = confirm("Are you sure you want to delete this car.");
 		if (ask) {
-			localStorage.removeItem(this.key);
+			$('div').remove(this.key);
 			alert("Car was deleted!");
 			window.location.reload();
+			console.log(key);
 		} else {
 			alert("Car was not deleted!");
 		}
