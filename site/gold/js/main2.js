@@ -235,10 +235,10 @@ $('#carlist').on('pageinit', function(editCar){
 	function deleteItem() {
 		var ask = confirm("Are you sure you want to delete this car.");
 		if (ask) {
-			$('div').remove(this.key);
+			$('div').remove();
 			alert("Car was deleted!");
 			window.location.reload();
-			console.log(key);
+			
 		} else {
 			alert("Car was not deleted!");
 		}
