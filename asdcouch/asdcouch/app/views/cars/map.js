@@ -1,6 +1,7 @@
 function (doc) {
 	if (doc._id.substr(0, 3) === "car"){
 		emit(doc.make, {
+			"rev": doc._rev,
 			"make": doc.make,
 			"model": doc.model,
 			"year": doc.year,

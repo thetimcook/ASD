@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tablets>
+    <item>
+    	<title>iPad</title>
+        <res>2048 x 1536, 264 ppi</res>
+        <pro>Dual-core A6X with quad-core graphics</pro>
+        <height>9.50 inches (241.2 mm)</height>
+        <width>7.31 inches (185.7 mm)</width>
+        <depth>0.37 inch (9.4 mm)</depth>
+        <weight>1.44 pounds (652 g)</weight>
+        <price currency="USD">499</price>
+    </item>
+    <item>
+    	<title>iPad Mini</title>
+        <res>1024 x 768, 163 ppi</res>
+        <pro>Dual-core A5</pro>
+        <height>7.87 inches (200 mm)</height>
+        <width>5.3 inches (134.7 mm)</width>
+        <depth>0.28 inch (7.2 mm)</depth>
+        <weight>0.68 pound (308 g)</weight>
+        <price currency="USD">329</price>
+    </item>
+    <item>
+    	<title>Nexus 7</title>
+        <res>1280 x 800, 216 ppi</res>
+        <pro>NVIDIA(R) Tegra(R) 3 quad-core processor</pro>
+        <height>198.5mm</height>
+        <width>120mm</width>
+        <depth>10.45mm</depth>
+        <weight>340g</weight>
+        <price currency="USD">199</price>
+    </item>
+    <item>
+    	<title>Nexus 10</title>
+        <res>2560 x 1600, 300 ppi</res>
+        <pro>Dual-core A15</pro>
+        <height>263.9mm</height>
+        <width>177.6mm</width>
+        <depth>8.9 mm</depth>
+        <weight>603g</weight>
+        <price currency="USD">399</price>
+    </item>
+    <item>
+    	<title>Kindle Fire HD</title>
+        <res>1920 x 1200, 254 ppi</res>
+        <pro>Dual-core, 1.5GHz OMAP4470</pro>
+        <height>9.45" (240 mm)</height>
+        <width>6.5" (164 mm)</width>
+        <depth>0.35" (8.8 mm)</depth>
+        <weight>20 oz (567 grams)</weight>
+        <price currency="USD">299</price>
+    </item>    
+</tablets>
+
+
+
+

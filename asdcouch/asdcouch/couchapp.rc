@@ -4,7 +4,7 @@
       "db": "http://127.0.0.1:5984/cartagapp"
     },
     "cloudant": {
-      "db": "https://argedivinedyingerbitheet:PfyYpdsE4JBQiuEYv5VWxvJ1@thetimcook.cloudant.com/asdproject"
+      "db": "https://thetimcook:Romans121@thetimcook.cloudant.com/cartagapp"
     }
   }
 }

@@ -5,12 +5,12 @@ $(document).ready(function(){
 		success: function(data) {
 			$.each(data.rows, function(index, cars) {
 				var key = cars.key
-					make = cars.value.make,
-					model = cars.value.model,
-					year = cars.value.year,
-					color = cars.value.color,
-					display = cars.value.display,
-					condition = cars.value.condition,
+					make = cars.value.make
+					model = cars.value.model
+					year = cars.value.year
+					color = cars.value.color
+					display = cars.value.display
+					condition = cars.value.condition
 					describe = cars.value.describe
 				$(''+
 					'<div data-role="collapsible">'+
