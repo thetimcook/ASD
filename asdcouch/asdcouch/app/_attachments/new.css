@@ -1,8 +1,4 @@
 
-@font-face {
-	font-family: modernpics;
-	src: url('modernpics.otf');
-}
 
 body {
 	font-family: Helvetica, sans-serif;
@@ -41,7 +37,7 @@ h2 {
 	text-shadow: 0px 1px 4px black;
 }
 #home, #carlist, #tagcar, #account, #near, #friends {
-	background: url("images/bg.jpg");
+	background: url("bg.jpg");
 	background-repeat: repeat-x;
 }
 #foot{
