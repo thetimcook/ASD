@@ -88,7 +88,7 @@ $('#tagcar').on('pageinit', function (){
 		},
 		submitHandler: function () {
 			var data = tagForm.serializeArray();
-			storeData(this.key);
+			storeData();
 		}
 	});
 	
@@ -98,12 +98,7 @@ $('#tagcar').on('pageinit', function (){
 		color = $('#color');
 		describe = $('#describe');
 			
-	function storeData(key) {
-		if (!key) {
-			var id = $.now();
-		} else {
-			id = key;
-		}	
+	function storeData() {
 		var condition = $(':radio:checked').val();
 		var display = getCheckboxValue();
 		var car				= {};
@@ -125,6 +120,7 @@ $('#tagcar').on('pageinit', function (){
 /* 		localStorage.setItem(id, JSON.stringify(car)); */
 		alert("Car Tagged!");
 		$.mobile.changePage('#account');
+		window.location.reload();
 	}
 	
 	function getCheckboxValue() {
@@ -192,49 +188,45 @@ $('#account').on("pageinit", function() {
 		editLink.on("click", function() {
 			$.couch.db("cartagapp").openDoc(id, {
 			    success: function(car) {
-			    $.mobile.changePage('#tagcar');
-				console.log(car.year);
-				
-				//populate form fields with current values
-				$('#make').val(''+ car.make);
-				$('#model').val(''+ car.model);
-				$("#year option[text=" + car.year +"]").attr("selected","selected");
-/* 				$('#year').val(''+ car.year).attr('selected','true'); */
-				$('#color').val(''+ car.color).attr('selected','true');
-			
-				var checkboxes = document.forms[0].display;
-				for (var i=0; i<car.display.length; i++) {
-					$(''+ car.display[i]).attr("checked", "checked");
-				}
-				$(':radio:checked').val(''+ car.condition);
-				
-				/*
-var radios = document.forms[0].condition;
-				for (var i=0; i<radios.length; i++) {
-					if (radios[i].value == "Amazing" && car.condition == "Amazing"){
-						radios[i].attr("checked", "checked");
-					} else if (radios[i].value == "Not so amazing" && car.condition == "Not so amazing") {
-						radios[i].attr("checked", "checked");
-					} else if (radios[i].value == "Rubbish" && car.condition == "Rubbish") {
-						radios[i].attr("checked", "checked");
+				    $.mobile.changePage('#tagcar');
+					console.log(car.year);
+					
+					//populate form fields with current values
+					$('#make').val(''+ car.make);
+					$('#model').val(''+ car.model);
+					$("#year option[value=" + car.year +"]").attr("selected","selected");
+					$('#year').selectmenu('refresh', true);
+					$("#color option[value="+ car.color +"]").attr("selected","selected");
+					$('#color').selectmenu('refresh', true);
+					$("input[type='radio'][value="+ car.condition +"]").attr("checked", "true").checkboxradio("refresh");
+					for (var i=0; i<car.display.length; i++) {
+						$("input[type='checkbox'][value="+ car.display[i] +"]").attr("checked", "true").checkboxradio("refresh");
 					}
-				}
-*/
-				$('#describe').val(''+ car.describe);
-				
-				//remove the listener from input save button.
-				
-				//Change submit button value to edit button
-				$('#headerBar').html('Edit Car Tag');
-				$('#submit').val('Edit Car Tag');
-				var editSubmit = $('#submit');
-				//Save the key value established in this function as a property of the editSubmit event
-				//so we can use that value when we save the data we edited.
-				/*
-editSubmit.on("click", validate);
-				editSubmit.key = this.key;
-*/
-
+					$('#describe').val(''+ car.describe);
+					
+					//remove the listener from input save button.
+					
+					//Change submit button value to edit button
+					$('#headerBar').html('Edit Car Tag');
+					$('#submit').val('Edit Car Tag');
+					var editSubmit = $('#submit');
+					
+					
+					editSubmit.on("click", function(){
+						var doc = {
+						    _id: ""+ id +"",
+						    _rev: ""+ rev +"",
+						    foo: "bar"
+						};
+						$.couch.db("cartagapp").saveDoc(doc, {
+						    success: function(data) {
+						        console.log(data);
+						    }
+						});
+					alert("Car Updated!");
+					$.mobile.changePage('#account');
+					window.location.reload();
+					});
 				}
 			});
 		});
@@ -248,7 +240,7 @@ editSubmit.on("click", validate);
 		$.couch.db("cartagapp").removeDoc(doc, {
 			success: function(data) {
 				console.log(data);
-				$('#carlist').trigger("create");
+				$('#account').trigger("create");
 			}
 		});
 	}
