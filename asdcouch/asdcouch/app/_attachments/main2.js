@@ -36,8 +36,6 @@ $('#tagcar').on('pageinit', function (){
 				console.log(data);
 			}
 		});
-		
-/* 		localStorage.setItem(id, JSON.stringify(car)); */
 		alert("Car Tagged!");
 		$.mobile.changePage('#account');
 		window.location.reload();
@@ -72,7 +70,7 @@ $('#account').on("pageinit", function() {
 					id = cars.id
 					rev = cars.value.rev
 				$(''+
-					'<div id="'+ id +'" data-role="collapsible">'+
+					'<div id="'+ id +'" data-role="collapsible" data-content-theme="d">'+
 						'<h3>'+ key +'</h3>'+
 						'<p>Make: '+ make +'</p>'+
 						'<p>Model: '+ model +'</p>'+
@@ -123,9 +121,7 @@ $('#account').on("pageinit", function() {
 						$("input[type='checkbox'][value="+ car.display[i] +"]").attr("checked", "true").checkboxradio("refresh");
 					}
 					$('#describe').val(''+ car.describe);
-					
-					//remove the listener from input save button.
-					
+										
 					//Change submit button value to edit button
 					$('#headerBar').html('Edit Car Tag');
 					$('#submit').val('Edit Car Tag');

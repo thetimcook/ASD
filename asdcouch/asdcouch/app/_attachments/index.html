@@ -32,7 +32,6 @@
 				<div id="logo" style="padding: 0px 25%">
 					<img src="logo.png" style="height:40px; width:150px"/>
 				</div>
-				<a id="search" href="#carlist" data-role="button" data-inline="true" data-mini="true" data-icon="search" data-iconpos="notext" class="ui-btn-right">search</a>
 			</div>
 			<div id="feature" style="background-image:url(Car1Motion.jpg)">
 				<h2>Collect and share amazing cars you find on your travels</h2>
@@ -45,12 +44,11 @@
 					<li><a id="accountBtn" href="#account" data-transition="slide">View My Garage</a></li>
 					<li><a id="friendsBtn" href="#friends" data-transition="slide">Visit Friends</a></li>
 					<li><a id="nearBtn" href="#near" data-transition="slide">Nearby Cars</a></li>
-					<li><a id="test" href="#test" data-transition="slide">Data Test Page</a></li>
 				</ul>
 			</div> 
 			<div id="foot">
 				<h3>a <a href="http://www.pixelplunder.com" data-ajax="false">pixel plunder</a> app</h3>
-				<h4><a href="http://tcook.me/miu/bronze/index.html" data-ajax="false">to bronze app</a></h4>
+				<h4>by <a href="http://tcook.me" data-ajax="false">@thetimcook</a></h4>
 			</div>
 			
 			<div data-role="footer" data-position="fixed" data-id="main">
@@ -91,11 +89,11 @@
 				</div><!-- /grid-b -->
 			</div>
 			<div data-role="content">
-				<ul data-role="listview" data-filter="true">
-					<div id="carlist" data-role="collapsible-set">
+				<div id="theSet" data-role="collapsible-set">
+					<div id="carlist" data-role="listview" data-filter="true" data-inset="false">
 						
 					</div>	
-				</ul>
+				</div>
 			</div>
 			<div data-role="footer" data-position="fixed" data-id="main">
 				<div data-role="navbar" id="navbar" data-position="fixed" data-theme="a">
@@ -307,6 +305,7 @@
 			</div>
 		</div>
 		
+<!--
 		<div data-role="page" id="carlist">
 			<div data-role="header" data-theme="b" data-position="fixed" data-id="main">
 				<a id="back" data-rel="back" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="notext" class="ui-btn-left">back</a>
@@ -326,27 +325,11 @@
 						<li><a href="#friends"><img src="friends2x.png" height="20px" width="40px"/><br/>Friends</a></li>
 						<li><a href="#near"><img src="near2x.png" height="20px" width="40px"/><br/>Nearby</a></li>
 					</ul>
-				</div><!-- /navbar -->
+				</div>
 			</div>
 
 		</div>
-		
-		<div data-role="page" id="test">
-			<div data-role="header" data-theme="b" data-position="fixed" data-id="main">
-				<a id="back" data-rel="back" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="notext" class="ui-btn-left">back</a>
-				<h1>Data Test</h1>
-			</div>
-			<div data-role="content">
-				<ul data-role="listview" data-inset="true">
-					<li><a href="#jsondata">JSON</a></li>
-					<li><a href="#xmldata">XML</a></li>
-					<li data-theme="a"><a>WDDX</a></li>
-					<li data-theme="a"><a>YAML</a></li>
-					<li><a href="#csvdata">CSV</a></li>
-				</ul>	
-			</div>
-		</div>
-		
+	
 		<div data-role="page" id="jsondata">
 			<div data-role="header" data-theme="b" data-position="fixed" data-id="main">
 				<a id="back" data-rel="back" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="notext" class="ui-btn-left">back</a>
@@ -376,7 +359,7 @@
 				
 			</div>		
 		</div>
-		
+-->			
 
 		<script src="main2.js" type="text/javascript"></script>
 	</body>

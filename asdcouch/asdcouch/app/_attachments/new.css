@@ -38,7 +38,7 @@ h2 {
 }
 #home, #carlist, #tagcar, #account, #near, #friends {
 	background: url("bg.jpg");
-	background-repeat: repeat-x;
+	background-repeat: repeat;
 }
 #foot{
 	text-align: center;
@@ -47,6 +47,10 @@ h2 {
 }
 ul {
 	list-style-type: none;
+	padding: 0px;
+}
+#theSet {
+	margin: 0px;
 	padding: 0px;
 }
 #errors {
