@@ -88,7 +88,9 @@ $('#tagcar').on('pageinit', function (){
 		},
 		submitHandler: function () {
 			var data = tagForm.serializeArray();
-			storeData();
+			if ($('#submit').val() === "Tag Car") {
+				storeData();
+			}
 		}
 	});
 	
@@ -211,21 +213,48 @@ $('#account').on("pageinit", function() {
 					$('#submit').val('Edit Car Tag');
 					var editSubmit = $('#submit');
 					
-					
 					editSubmit.on("click", function(){
-						var doc = {
-						    _id: ""+ id +"",
-						    _rev: ""+ rev +"",
-						    foo: "bar"
-						};
-						$.couch.db("cartagapp").saveDoc(doc, {
+						var make = $('#make');
+							model = $('#model');
+							year = $('#year');
+							color = $('#color');
+							describe = $('#describe');
+						var condition = $(':radio:checked').val();
+						var display = getCheckboxValue();
+						var car				= {};
+							car._id			= id;
+							car._rev		= rev;
+							car.make		= make.val();
+							car.model		= model.val();
+							car.year		= year.val();
+							car.color		= color.val();
+							car.condition	= condition;
+							car.display		= display;
+							car.describe	= describe.val();
+						console.log(car);
+						
+						$.couch.db("cartagapp").saveDoc(car, {
 						    success: function(data) {
 						        console.log(data);
 						    }
-						});
-					alert("Car Updated!");
-					$.mobile.changePage('#account');
-					window.location.reload();
+						});	
+						
+						alert("Car Updated!");
+						$.mobile.changePage('#account');
+						window.location.reload();
+							
+						function getCheckboxValue() {
+							var checkboxes = $(':checkbox:checked');
+							var holdValues = [];
+							for (var i=0, j=checkboxes.length; i<j; i++){
+								if(checkboxes[i].checked){
+									var checkedValue = checkboxes[i].value;
+									holdValues.push(checkedValue);
+								}
+							}
+							return holdValues;	
+						}
+					
 					});
 				}
 			});
@@ -246,107 +275,6 @@ $('#account').on("pageinit", function() {
 	}
 	
 });
-
-/*
-$('#carlist').on('pageinit', function(editCar){
-	function autoFill() {
-		$.ajax({
-			url: 'xhr/jsoncars.php',
-			type: 'GET',
-			dataType: 'json',
-			success: function (response){
-				for (var i=0, j=response.cars.length; i<j; i++) {
-					var car = response.cars[i];
-					var id = Math.floor(Math.random()*1000000000000);
-					localStorage.setItem(id, JSON.stringify(car));
-				}	
-			}
-		});
-		
-	}
-	function getData(makeItemlinks){
-		if(localStorage.length === 0) {
-			alert("There are no cars in your Garage, so I went ahead and added a couple!");
-			autoFill();
-		}
-		for (var i=0, len=localStorage.length; i<len; i++){
-			var key = localStorage.key(i);
-			var value = localStorage.getItem(key);
-			//Convert the string from local storage value back to an object.
-			var obj = JSON.parse(value);
-			if(!isNaN(key)) {
-				$(''+
-					'<div id="'+ key +'" data-role="collapsible" data-inset="false" style="margin:0px">'+
-						'<h3>'+ obj.make +'</h3>'+
-						'<p> Make: '+ obj.make +'</p>'+
-						'<p> Model: '+ obj.model +'</p>'+
-						'<p> Year: '+ obj.year +'</p>'+
-						'<p> Color: '+ obj.color +'</p>'+
-						'<p> Condition: '+ obj.condition +'</p>'+
-						'<p> What made it stand out? '+ obj.display +'</p>'+
-						'<p> Why was this car worth tagging? '+ obj.describe +'</p>'+
-						'<li><a class="editLink" data-role="button" data-inline="true" data-theme="b" href="#tagcar" data-mini="true">Edit Car</a>'+
-						'<a class="deleteLink" data-role="button" data-inline="true" data-theme="b" href="#tagcar" data-mini="true">Delete Car</a>'+
-						'</li>'+
-					'</div>' 
-				).appendTo('#makeList');
-
-				makeItemLinks(localStorage.key(i));  //Create edit and delete buttons
-
-			}
-			
-		}
-		$('#makeList').trigger("create");
-		
-	}
-	
-	function deleteItem() {
-		var ask = confirm("Are you sure you want to delete this car.");
-		if (ask) {
-			$('div').remove();
-			alert("Car was deleted!");
-			window.location.reload();
-			
-		} else {
-			alert("Car was not deleted!");
-		}
-		event.stopPropagation();
-	}
-	
-	function clearLocal() {
-		if (localStorage.length === 0) {
-			alert("No cars to clear.");
-		} else {
-			localStorage.clear();
-			alert("All cars are deleted!");
-			window.location.reload();
-		}
-	}
-	
-	
-	//Create the edit and delete links for each item
-	function makeItemLinks(key) {
-		//add edit single item link
-		
-		var editLink = $('.editLink');
-		editLink.key = key;
-		editLink.on("click", editCar);
-
-		//add delete single item link
-
-		var deleteLink = $('.deleteLink');
-		deleteLink.key = key;
-		deleteLink.on("click", deleteItem);
-	}
-	
-	getData();
-
-	$('#clear').on("click", clearLocal);
-
-});
-*/
-
-
 
 
 
